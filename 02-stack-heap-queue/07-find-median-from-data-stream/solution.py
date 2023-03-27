@@ -23,7 +23,7 @@ class MedianFinder(object):
         self.nums = self.nums[:i] + [num] + self.nums[i:]
     
     def findMedian(self) -> float:
-        m = len(self.nums) // 2
+        m = len(self.nums) // 2 
         if len(self.nums) % 2 == 0:
             return (self.nums[m]+self.nums[m-1])/2
         else:

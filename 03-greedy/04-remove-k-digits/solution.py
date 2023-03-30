@@ -1,28 +1,25 @@
 #! /usr/bin/python
 
+"""
+LeetCode 402
+"""
+
 class Solution(object):
     
     def remove_k_digits(self, num: str, k: int) -> str:
-        if len(num) == 1:
-            return "0"
         stack = []
         for i in num:
-            if not stack:
-                stack.append(i)
-                continue
-            # keep stack top or tick off
-            if stack[-1] > i and k > 0:
-                k -= 1
-                # pop element
+            while stack and stack[-1] > i and k > 0:
                 stack.pop()
+                k -= 1
+            if i != '0' or stack:
                 stack.append(i)
-            else:
-                stack.append(i)
-        if not stack:
-            return "0"
-        result = "".join(stack).lstrip("0")
-        if result:
-            return result
+        # k != 0
+        while stack and k > 0:
+            stack.pop()
+            k -= 1
+        if stack:
+            return "".join(stack)
         return "0"
 
 if __name__ == "__main__":
